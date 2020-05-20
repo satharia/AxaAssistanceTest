@@ -1,7 +1,12 @@
-﻿namespace AxaAssistanceTest.Models.Entities.Customers
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using AxaAssistanceTest.Models.Entities.Reservations;
+
+namespace AxaAssistanceTest.Models.Entities.Customers
 {
     public class Customer : AuditEntity
     {
+        [Key]
         public string Id { get; set; }
         public IdTypes IdType { get; set; }
         public string FirstName { get; set; }
@@ -12,5 +17,9 @@
         public string AddressDetail { get; set; }
         public string ResidenceCity { get; set; }
         public string ResidenceCountry { get; set; }
+
+        public virtual ICollection<Reservation> Reservations { get; set; }
+
+        public Customer() : base() { }
     }
 }
