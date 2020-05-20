@@ -37,11 +37,22 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
         public void SaveBook(Book value)
         {
+            value.CreationTime = DateTime.Now;
             this.BookRepository.SaveBook(value);
         }
 
         public void UpdateBook(Book value)
         {
+            Book book = this.BookRepository.GetBook(value.Id.Value);
+
+            if (book != null)
+            {
+                value.CreationTime = book.CreationTime;
+            }
+            else
+            {
+                value.CreationTime = DateTime.Now;
+            }
             value.ModificationTime = DateTime.Now;
             this.BookRepository.UpdateBook(value);
         }
