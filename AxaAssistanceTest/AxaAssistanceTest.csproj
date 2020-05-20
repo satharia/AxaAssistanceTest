@@ -194,8 +194,11 @@
     <Compile Include="Models\Entities\Customers\Customer.cs" />
     <Compile Include="Models\Entities\Customers\IdTypes.cs" />
     <Compile Include="Models\Entities\Reservations\Reservation.cs" />
+    <Compile Include="Models\Entities\Reservations\ReservedBook.cs" />
     <Compile Include="Models\Repositories\Books\IBookRepository.cs" />
     <Compile Include="Models\Repositories\Customers\ICustomerRepository.cs" />
+    <Compile Include="Models\Repositories\DAL\EntityFramework\AxaLibraryContext.cs" />
+    <Compile Include="Models\Repositories\DAL\EntityFramework\TestDataInitializer.cs" />
     <Compile Include="Models\Repositories\Reservations\IReservationsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
