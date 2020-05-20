@@ -1,4 +1,6 @@
-﻿using AxaAssistanceTest.Models.DomainLogic.Service;
+﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.ApplicationLogic.Exceptions;
+using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Reservations;
 using System;
 using System.Collections.Generic;
@@ -20,27 +22,97 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Reservation> ListReservations()
+        public HttpResponseMessage ListReservations()
         {
-            return this.ReservationService.ListReservations();
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.ReservationService.ListReservations());
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpGet]
-        public Reservation GetReservation(int id)
+        public HttpResponseMessage GetReservation(int id)
         {
-            return this.ReservationService.GetReservation(id);
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.ReservationService.GetReservation(id));
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.NotFound, new BasicApiResponse { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public void CreateReservation([FromBody]Reservation value)
+        public HttpResponseMessage CreateReservation([FromBody]Reservation value)
         {
-            this.ReservationService.CreateReservation(value);
+            BasicApiResponse response = new BasicApiResponse();
+            try
+            {
+                this.ReservationService.CreateReservation(value);
+
+                response.Message = ResponseMessages.CreateReservationOk;
+                response.Data = value;
+            }
+            catch (ArgumentNullException ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, response);
+            }
+            catch (UnavailableStateException ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.PreconditionFailed, response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpPut]
-        public void CloseReservation([FromBody]Reservation value)
+        public HttpResponseMessage CloseReservation([FromBody]Reservation value)
         {
-            this.ReservationService.CloseReservation(value);
+            BasicApiResponse response = new BasicApiResponse();
+            try
+            {
+                this.ReservationService.CloseReservation(value);
+
+                response.Message = ResponseMessages.CloseReservationOk;
+            }
+            catch (ArgumentNullException ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.BadRequest, response);
+            }
+            catch (EntityNotFoundException ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.NotFound, response);
+            }
+            catch (UnavailableStateException ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.PreconditionFailed, response);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
     }
 }

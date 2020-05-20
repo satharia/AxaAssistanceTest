@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.Entities.Books;
+﻿using AxaAssistanceTest.Models.ApplicationLogic.Exceptions;
+using AxaAssistanceTest.Models.Entities.Books;
 using AxaAssistanceTest.Models.Repositories.Books;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
             if(book == null)
             {
-                throw new Exception(string.Format("The resource was not found, Book with ID: {0}", id));
+                throw new EntityNotFoundException(string.Format(ResponseMessages.BookNotFound, id));
             }
 
             return book;
