@@ -195,10 +195,13 @@
     <Compile Include="Models\Entities\Customers\IdTypes.cs" />
     <Compile Include="Models\Entities\Reservations\Reservation.cs" />
     <Compile Include="Models\Entities\Reservations\ReservedBook.cs" />
+    <Compile Include="Models\Repositories\Books\EntityFrameworkBookRepository.cs" />
     <Compile Include="Models\Repositories\Books\IBookRepository.cs" />
+    <Compile Include="Models\Repositories\Customers\EntityFrameworkCustomerRepository.cs" />
     <Compile Include="Models\Repositories\Customers\ICustomerRepository.cs" />
     <Compile Include="Models\Repositories\DAL\EntityFramework\AxaLibraryContext.cs" />
     <Compile Include="Models\Repositories\DAL\EntityFramework\TestDataInitializer.cs" />
+    <Compile Include="Models\Repositories\Reservations\EntityFrameworkReservationRepository.cs" />
     <Compile Include="Models\Repositories\Reservations\IReservationsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -255,6 +258,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\DomainLogic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
