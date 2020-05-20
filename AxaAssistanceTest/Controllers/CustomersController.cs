@@ -1,7 +1,11 @@
 ﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.ApplicationLogic.Exceptions;
 using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Customers;
+using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace AxaAssistanceTest.Controllers
@@ -17,47 +21,92 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Customer> List()
+        public HttpResponseMessage List()
         {
-            return this.CustomerService.ListCustomers();
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.CustomerService.ListCustomers());
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpGet]
-        public Customer Get(string id)
+        public HttpResponseMessage Get(string id)
         {
-            return this.CustomerService.GetCustomer(id);
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.CustomerService.GetCustomer(id));
+            }
+            catch (EntityNotFoundException ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.NotFound, new BasicApiResponse { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public BasicApiResponse Post([FromBody]Customer value)
+        public HttpResponseMessage Post([FromBody]Customer value)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.CustomerService.SaveCustomer(value);
+            try
+            {
+                this.CustomerService.SaveCustomer(value);
 
-            response.Message = "Successfully saved the Customer object";
-            response.Data = value;
-            return response;
+                response.Message = "Successfully saved the Customer object";
+                response.Data = value;
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpPut]
-        public BasicApiResponse Put([FromBody]Customer value)
+        public HttpResponseMessage Put([FromBody]Customer value)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.CustomerService.UpdateCustomer(value);
+            try
+            {
+                this.CustomerService.UpdateCustomer(value);
 
-            response.Message = "Successfully updated the Customer object";
-            response.Data = value;
-            return response;
+                response.Message = "Successfully updated the Customer object";
+                response.Data = value;
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpDelete]
-        public BasicApiResponse Delete(string id)
+        public HttpResponseMessage Delete(string id)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.CustomerService.DeleteCustomer(id);
+            try
+            {
+                this.CustomerService.DeleteCustomer(id);
 
-            response.Message = "Successfully deleted the Customer object";
-            return response;
+                response.Message = "Successfully deleted the Customer object";
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
     }
 }

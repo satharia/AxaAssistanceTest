@@ -1,7 +1,10 @@
 ﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.ApplicationLogic.Exceptions;
 using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Books;
-using System.Collections.Generic;
+using System;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace AxaAssistanceTest.Controllers
@@ -17,47 +20,92 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Book> List()
+        public HttpResponseMessage List()
         {
-            return this.BookService.ListBooks();
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.BookService.ListBooks());
+            }
+            catch(Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpGet]
-        public Book Get(long id)
+        public HttpResponseMessage Get(long id)
         {
-            return this.BookService.GetBook(id);
+            try
+            {
+                return this.Request.CreateResponse(HttpStatusCode.OK, this.BookService.GetBook(id));
+            }
+            catch(EntityNotFoundException ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.NotFound, new BasicApiResponse { Message = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, new BasicApiResponse { Message = ex.Message });
+            }
         }
 
         [HttpPost]
-        public BasicApiResponse Post([FromBody]Book value)
+        public HttpResponseMessage Post([FromBody]Book value)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.BookService.SaveBook(value);
+            try
+            {
+                this.BookService.SaveBook(value);
 
-            response.Message = "Successfully saved the Book object";
-            response.Data = value;
-            return response;
+                response.Message = "Successfully saved the Book object";
+                response.Data = value;
+            }
+            catch(Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpPut]
-        public BasicApiResponse Put([FromBody]Book value)
+        public HttpResponseMessage Put([FromBody]Book value)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.BookService.UpdateBook(value);
+            try
+            {
+                this.BookService.UpdateBook(value);
 
-            response.Message = "Successfully updated the Book object";
-            response.Data = value;
-            return response;
+                response.Message = "Successfully updated the Book object";
+                response.Data = value;
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.InternalServerError, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
 
         [HttpDelete]
-        public BasicApiResponse Delete(long id)
+        public HttpResponseMessage Delete(long id)
         {
             BasicApiResponse response = new BasicApiResponse();
-            this.BookService.DeleteBook(id);
+            try
+            {
+                this.BookService.DeleteBook(id);
 
-            response.Message = "Successfully deleted the Book object";
-            return response;
+                response.Message = "Successfully deleted the Book object";
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                return this.Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+
+            return this.Request.CreateResponse(HttpStatusCode.OK, response);
         }
     }
 }

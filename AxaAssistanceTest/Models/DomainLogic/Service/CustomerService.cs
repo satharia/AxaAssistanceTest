@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.Entities.Customers;
+﻿using AxaAssistanceTest.Models.ApplicationLogic.Exceptions;
+using AxaAssistanceTest.Models.Entities.Customers;
 using AxaAssistanceTest.Models.Repositories.Customers;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
             if (customer == null)
             {
-                throw new Exception(string.Format("The resource was not found, Customer with ID: {0}", id));
+                throw new EntityNotFoundException(string.Format("The resource was not found, Customer with ID: {0}", id));
             }
 
             return customer;
