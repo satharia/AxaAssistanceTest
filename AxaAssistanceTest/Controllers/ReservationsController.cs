@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.Entities.Reservations;
+﻿using AxaAssistanceTest.Models.DomainLogic.Service;
+using AxaAssistanceTest.Models.Entities.Reservations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,26 +11,36 @@ namespace AxaAssistanceTest.Controllers
 {
     public class ReservationsController : ApiController
     {
+        private ReservationService ReservationService;
+
+        public ReservationsController() { }
+
+        public ReservationsController(ReservationService ReservationService) {
+            this.ReservationService = ReservationService;
+        }
+
         [HttpGet]
         public IEnumerable<Reservation> ListReservations()
         {
-            return new List<Reservation>();
+            return this.ReservationService.ListReservations();
         }
 
         [HttpGet]
         public Reservation GetReservation(int id)
         {
-            return new Reservation();
+            return this.ReservationService.GetReservation(id);
         }
 
         [HttpPost]
-        public void OpenReservation([FromBody]Reservation value)
+        public void CreateReservation([FromBody]Reservation value)
         {
+            this.ReservationService.CreateReservation(value);
         }
 
         [HttpPut]
         public void CloseReservation([FromBody]Reservation value)
         {
+            this.ReservationService.CloseReservation(value);
         }
     }
 }

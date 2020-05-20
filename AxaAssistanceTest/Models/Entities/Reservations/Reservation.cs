@@ -17,7 +17,6 @@ namespace AxaAssistanceTest.Models.Entities.Reservations
 
         [JsonIgnore]
         public virtual Customer Customer { get; set; }
-        [JsonIgnore]
         public virtual ICollection<ReservedBook> ReservedBooks { get; set; }
 
         public Reservation() : base() { }

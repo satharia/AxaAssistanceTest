@@ -7,6 +7,7 @@ namespace AxaAssistanceTest.Models.Repositories.Reservations
     {
         List<Reservation> GetAllReservations();
         Reservation GetReservation(long id);
+        Reservation GetReservationByCustomerId(string CustomerId);
         void SaveReservation(Reservation reservation);
         void UpdateReservation(Reservation reservation);
         void DeleteReservation(long id);

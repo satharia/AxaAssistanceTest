@@ -28,6 +28,11 @@ namespace AxaAssistanceTest.Models.Repositories.Reservations
             Reservation reservation = this.DbContext.Reservations.Find(id);
             return reservation;
         }
+        public Reservation GetReservationByCustomerId(string CustomerId)
+        {
+            Reservation reservation = this.DbContext.Reservations.SingleOrDefault(r => r.CustomerId == CustomerId && r.ReturnDate == null);
+            return reservation;
+        }
 
         public void SaveReservation(Reservation reservation)
         {
