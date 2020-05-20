@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
 using Autofac.Integration.WebApi;
+using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Books;
 using AxaAssistanceTest.Models.Repositories.Books;
 using AxaAssistanceTest.Models.Repositories.Customers;
@@ -39,6 +40,10 @@ namespace AxaAssistanceTest
             iocBuilder.RegisterType<EntityFrameworkBookRepository>().As<IBookRepository>().InstancePerRequest();
             iocBuilder.RegisterType<EntityFrameworkCustomerRepository>().As<ICustomerRepository>().InstancePerRequest();
             iocBuilder.RegisterType<EntityFrameworkReservationRepository>().As<IReservationRepository>().InstancePerRequest();
+
+            iocBuilder.RegisterType<BookService>().InstancePerRequest();
+            iocBuilder.RegisterType<CustomerService>().InstancePerRequest();
+            iocBuilder.RegisterType<ReservationService>().InstancePerRequest();
 
             var iocContainer = iocBuilder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(iocContainer));

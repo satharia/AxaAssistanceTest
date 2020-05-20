@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace AxaAssistanceTest.Models.Entities.Reservations
         public int ReservationId { get; set; }
         public int BookId { get; set; }
 
+        [JsonIgnore]
         public virtual Reservation Reservation { get; set; }
 
         public ReservedBook() : base() { }
