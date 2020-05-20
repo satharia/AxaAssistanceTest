@@ -188,6 +188,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationLogic\BasicApiResponse.cs" />
     <Compile Include="Models\DomainLogic\Service\BookService.cs" />
     <Compile Include="Models\DomainLogic\Service\CustomerService.cs" />
     <Compile Include="Models\DomainLogic\Service\ReservationService.cs" />
@@ -260,6 +261,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\ApplicationLogic\Exceptions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

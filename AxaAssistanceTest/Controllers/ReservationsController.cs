@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.DomainLogic.Service;
+﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Reservations;
 using System;
 using System.Collections.Generic;
@@ -32,15 +33,24 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpPost]
-        public void CreateReservation([FromBody]Reservation value)
+        public BasicApiResponse CreateReservation([FromBody]Reservation value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.ReservationService.CreateReservation(value);
+
+            response.Message = "Successfully created the Reservation, this Customer may not open a new one until this is closed";
+            response.Data = value;
+            return response;
         }
 
         [HttpPut]
-        public void CloseReservation([FromBody]Reservation value)
+        public BasicApiResponse CloseReservation([FromBody]Reservation value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.ReservationService.CloseReservation(value);
+
+            response.Message = "Successfully closed the Reservation, this Customer may open a new one now";
+            return response;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.DomainLogic.Service;
+﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Books;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -28,21 +29,35 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]Book value)
+        public BasicApiResponse Post([FromBody]Book value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.BookService.SaveBook(value);
+
+            response.Message = "Successfully saved the Book object";
+            response.Data = value;
+            return response;
         }
 
         [HttpPut]
-        public void Put([FromBody]Book value)
+        public BasicApiResponse Put([FromBody]Book value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.BookService.UpdateBook(value);
+
+            response.Message = "Successfully updated the Book object";
+            response.Data = value;
+            return response;
         }
 
         [HttpDelete]
-        public void Delete(long id)
+        public BasicApiResponse Delete(long id)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.BookService.DeleteBook(id);
+
+            response.Message = "Successfully deleted the Book object";
+            return response;
         }
     }
 }

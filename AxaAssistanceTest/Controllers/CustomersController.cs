@@ -1,4 +1,5 @@
-﻿using AxaAssistanceTest.Models.DomainLogic.Service;
+﻿using AxaAssistanceTest.Models.ApplicationLogic;
+using AxaAssistanceTest.Models.DomainLogic.Service;
 using AxaAssistanceTest.Models.Entities.Customers;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -28,21 +29,35 @@ namespace AxaAssistanceTest.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]Customer value)
+        public BasicApiResponse Post([FromBody]Customer value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.CustomerService.SaveCustomer(value);
+
+            response.Message = "Successfully saved the Customer object";
+            response.Data = value;
+            return response;
         }
 
         [HttpPut]
-        public void Put([FromBody]Customer value)
+        public BasicApiResponse Put([FromBody]Customer value)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.CustomerService.UpdateCustomer(value);
+
+            response.Message = "Successfully updated the Customer object";
+            response.Data = value;
+            return response;
         }
 
         [HttpDelete]
-        public void Delete(string id)
+        public BasicApiResponse Delete(string id)
         {
+            BasicApiResponse response = new BasicApiResponse();
             this.CustomerService.DeleteCustomer(id);
+
+            response.Message = "Successfully deleted the Customer object";
+            return response;
         }
     }
 }
