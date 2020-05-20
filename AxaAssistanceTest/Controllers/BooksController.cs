@@ -57,7 +57,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.BookService.SaveBook(value);
 
-                response.Message = "Successfully saved the Book object";
+                response.Message = ResponseMessages.SaveBookOk;
                 response.Data = value;
             }
             catch(Exception ex)
@@ -77,7 +77,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.BookService.UpdateBook(value);
 
-                response.Message = "Successfully updated the Book object";
+                response.Message = ResponseMessages.UpdateBookOk;
                 response.Data = value;
             }
             catch (Exception ex)
@@ -97,7 +97,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.BookService.DeleteBook(id);
 
-                response.Message = "Successfully deleted the Book object";
+                response.Message = ResponseMessages.DeleteBookOk;
             }
             catch (Exception ex)
             {

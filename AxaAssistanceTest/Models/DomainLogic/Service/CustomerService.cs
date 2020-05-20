@@ -30,7 +30,7 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
             if (customer == null)
             {
-                throw new EntityNotFoundException(string.Format("The resource was not found, Customer with ID: {0}", id));
+                throw new EntityNotFoundException(string.Format(ResponseMessages.CustomerNotFound, id));
             }
 
             return customer;

@@ -31,7 +31,7 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
             if (reservation == null)
             {
-                throw new EntityNotFoundException(string.Format("The resource was not found, Reservation with ID: {0}", id));
+                throw new EntityNotFoundException(string.Format(ResponseMessages.ReservationNotFound, id));
             }
 
             return reservation;
@@ -41,18 +41,18 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
         {
             if(string.IsNullOrEmpty(value.CustomerId))
             {
-                throw new ArgumentNullException("Missing Customer ID, cannot create a Reservation without assigning a Customer");
+                throw new ArgumentNullException(ResponseMessages.ReservationMissingCustomer);
             }
 
             if(value.ReservedBooks == null || value.ReservedBooks.Count <= 0)
             {
-                throw new ArgumentNullException("Missing Reserved Books list, cannot create a Reservation without specifying the Reserved Books");
+                throw new ArgumentNullException(ResponseMessages.ReservationMissingBook);
             }
 
             Reservation reservation = this.ReservationRepository.GetReservationByCustomerId(value.CustomerId);
             if(reservation != null)
             {
-                throw new UnavailableStateException(string.Format("This Customer already has an open Book Reservation, the open Reservation's ID is: {0}", reservation.Id));
+                throw new UnavailableStateException(string.Format(ResponseMessages.ReservationAlreadyOpen, reservation.Id));
             }
 
             value.ReservationDate = DateTime.Now;
@@ -64,18 +64,18 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
         {
             if(value.Id == null)
             {
-                throw new ArgumentNullException("Missing Reservation ID, cannot close a Reservation without it's identifyer");
+                throw new ArgumentNullException(ResponseMessages.ReservationMissingID);
             }
 
             Reservation reservation = this.ReservationRepository.GetReservation(value.Id.Value);
             if (reservation == null)
             {
-                throw new EntityNotFoundException(string.Format("The resource was not found, Reservation with ID: {0}", value.Id));
+                throw new EntityNotFoundException(string.Format(ResponseMessages.ReservationNotFound, value.Id));
             }
 
             if(reservation.ReturnDate != null)
             {
-                throw new UnavailableStateException(string.Format("This Reservation is already closed, the closed Reservation's ID is: {0}", reservation.Id));
+                throw new UnavailableStateException(string.Format(ResponseMessages.ReservationAlreadyClosed, reservation.Id));
             }
 
             reservation.ReturnDate = DateTime.Now;

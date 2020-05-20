@@ -58,7 +58,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.CustomerService.SaveCustomer(value);
 
-                response.Message = "Successfully saved the Customer object";
+                response.Message = ResponseMessages.SaveCustomerOk;
                 response.Data = value;
             }
             catch (Exception ex)
@@ -78,7 +78,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.CustomerService.UpdateCustomer(value);
 
-                response.Message = "Successfully updated the Customer object";
+                response.Message = ResponseMessages.UpdateCustomerOk;
                 response.Data = value;
             }
             catch (Exception ex)
@@ -98,7 +98,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.CustomerService.DeleteCustomer(id);
 
-                response.Message = "Successfully deleted the Customer object";
+                response.Message = ResponseMessages.DeleteCustomerOk;
             }
             catch (Exception ex)
             {

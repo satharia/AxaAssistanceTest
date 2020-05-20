@@ -59,7 +59,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.ReservationService.CreateReservation(value);
 
-                response.Message = "Successfully created the Reservation, this Customer may not open a new one until this is closed";
+                response.Message = ResponseMessages.CreateReservationOk;
                 response.Data = value;
             }
             catch (ArgumentNullException ex)
@@ -89,7 +89,7 @@ namespace AxaAssistanceTest.Controllers
             {
                 this.ReservationService.CloseReservation(value);
 
-                response.Message = "Successfully closed the Reservation, this Customer may open a new one now";
+                response.Message = ResponseMessages.CloseReservationOk;
             }
             catch (ArgumentNullException ex)
             {

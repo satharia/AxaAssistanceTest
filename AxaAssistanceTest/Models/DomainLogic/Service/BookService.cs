@@ -30,7 +30,7 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
 
             if(book == null)
             {
-                throw new EntityNotFoundException(string.Format("The resource was not found, Book with ID: {0}", id));
+                throw new EntityNotFoundException(string.Format(ResponseMessages.BookNotFound, id));
             }
 
             return book;
