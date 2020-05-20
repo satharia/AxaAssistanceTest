@@ -1,4 +1,4 @@
-﻿using AxaAssistanceTest.Models.Entities.Books;
+﻿using AxaAssistanceTest.Models.Entities.Customers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,27 +8,26 @@ using System.Web.Http;
 
 namespace AxaAssistanceTest.Controllers
 {
-    public class BookController : ApiController
+    public class CustomersController : ApiController
     {
         [HttpGet]
-        public IEnumerable<Book> List()
+        public IEnumerable<Customer> List()
         {
-            return new List<Book>();
+            return new List<Customer>();
         }
 
         [HttpGet]
-        public Book Get(string id)
+        public Customer Get(string id)
         {
-            return new Book();
+            return new Customer();
         }
-
         [HttpPost]
-        public void Post([FromBody]Book value)
+        public void Post([FromBody]Customer value)
         {
         }
 
         [HttpPut]
-        public void Put(string id, [FromBody]Book value)
+        public void Put(string id, [FromBody]Customer value)
         {
         }
 

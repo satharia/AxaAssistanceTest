@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace AxaAssistanceTest.Controllers
 {
-    public class ReservationController : ApiController
+    public class ReservationsController : ApiController
     {
         [HttpGet]
         public IEnumerable<Reservation> ListReservations()
