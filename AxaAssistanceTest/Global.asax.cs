@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using Autofac.Integration.WebApi;
+using AxaAssistanceTest.Models.Entities.Books;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +22,19 @@ namespace AxaAssistanceTest
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var iocBuilder = new ContainerBuilder();
+
+            iocBuilder.RegisterControllers(typeof(WebApiApplication).Assembly);
+            iocBuilder.RegisterApiControllers(typeof(WebApiApplication).Assembly);
+            iocBuilder.RegisterFilterProvider();
+            iocBuilder.RegisterModule<AutofacWebTypesModule>();
+
+            var iocContainer = iocBuilder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(iocContainer));
+
+            var config = GlobalConfiguration.Configuration;
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(iocContainer);
         }
     }
 }
