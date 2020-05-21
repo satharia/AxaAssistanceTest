@@ -6,6 +6,9 @@ using Newtonsoft.Json;
 
 namespace AxaAssistanceTest.Models.Entities.Books
 {
+    /// <summary>
+    /// Entity class representing a physical Book from a library.
+    /// </summary>
     public class Book : AuditEntity
     {
         [Key]

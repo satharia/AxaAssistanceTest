@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AxaAssistanceTest.Models.Repositories.Books
 {
+    /// <summary>
+    /// Data Source accessor for the Book entity using Entity Framework.
+    /// </summary>
     public class EntityFrameworkBookRepository : IBookRepository
     {
         private AxaLibraryContext DbContext;
@@ -45,7 +48,7 @@ namespace AxaAssistanceTest.Models.Repositories.Books
             Book book = this.DbContext.Books.Find(id);
             if(book == null)
             {
-                throw new Exception($"Book with ID: {id} not found, Delete failed");
+                throw new Exception(string.Format(ResponseMessages.DeleteBookFailure, id));
             }
 
             this.DbContext.Books.Remove(book);

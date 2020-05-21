@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace AxaAssistanceTest.Models.Entities.Customers
 {
+    /// <summary>
+    /// Entity class representing a physical person who visits a library.
+    /// </summary>
     public class Customer : AuditEntity
     {
         [Key]

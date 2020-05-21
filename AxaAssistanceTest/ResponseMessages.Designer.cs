@@ -97,6 +97,15 @@ namespace AxaAssistanceTest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Book with ID: {0} not found, Delete failed.
+        /// </summary>
+        internal static string DeleteBookFailure {
+            get {
+                return ResourceManager.GetString("DeleteBookFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully deleted the Book object.
         /// </summary>
         internal static string DeleteBookOk {
@@ -106,11 +115,29 @@ namespace AxaAssistanceTest {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer with ID: {0} not found, Delete failed.
+        /// </summary>
+        internal static string DeleteCustomerFailure {
+            get {
+                return ResourceManager.GetString("DeleteCustomerFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully deleted the Customer object.
         /// </summary>
         internal static string DeleteCustomerOk {
             get {
                 return ResourceManager.GetString("DeleteCustomerOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation with ID: {0} not found, Delete failed.
+        /// </summary>
+        internal static string DeleteReservationFailure {
+            get {
+                return ResourceManager.GetString("DeleteReservationFailure", resourceCulture);
             }
         }
         

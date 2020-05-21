@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AxaAssistanceTest.Models.Repositories.Books
 {
+    /// <summary>
+    /// Data Source accessor for the Book entity.
+    /// </summary>
     public interface IBookRepository
     {
         List<Book> GetAllBooks();

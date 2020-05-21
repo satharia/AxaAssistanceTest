@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AxaAssistanceTest.Models.DomainLogic.Service
 {
+    /// <summary>
+    /// Class holding the business logic for the CRUD operations of the Book entity.
+    /// </summary>
     public class BookService
     {
         private IBookRepository BookRepository;
@@ -16,6 +19,12 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
             this.BookRepository = BookRepository;
         }
 
+        /// <summary>
+        /// Searches the Data Source for a complete List of Book objects.
+        /// </summary>
+        /// <returns>
+        /// Returns a list of all the Book objects found in the DataSource, an empty List if none are found.
+        /// </returns>
         public List<Book> ListBooks()
         {
             List<Book> books = this.BookRepository.GetAllBooks();
@@ -24,6 +33,13 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
             return books;
         }
 
+        /// <summary>
+        /// Searches the Data Source for a Book object that matches the provided Id
+        /// </summary>
+        /// <returns>
+        /// Returns a single Book object if found.
+        /// </returns>
+        /// <exception cref="EntityNotFoundException">Thrown when a Book is not found with the provided Id.</exception>
         public Book GetBook(long id)
         {
             Book book = this.BookRepository.GetBook(id);
@@ -36,12 +52,18 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
             return book;
         }
 
+        /// <summary>
+        /// Stores a Book object in the Data Source.
+        /// </summary>
         public void SaveBook(Book value)
         {
             value.CreationTime = DateTime.Now;
             this.BookRepository.SaveBook(value);
         }
 
+        /// <summary>
+        /// Updates a Book object in the Data Source that matches the Id of the provided Book object, if the Book object doesn't exist, it is created instead.
+        /// </summary>
         public void UpdateBook(Book value)
         {
             Book book = this.BookRepository.GetBook(value.Id.Value);
@@ -58,6 +80,9 @@ namespace AxaAssistanceTest.Models.DomainLogic.Service
             this.BookRepository.UpdateBook(value);
         }
 
+        /// <summary>
+        /// Deletes a Book object from the Data Source.
+        /// </summary>
         public void DeleteBook(long id)
         {
             this.BookRepository.DeleteBook(id);

@@ -129,11 +129,20 @@
   <data name="CustomerNotFound" xml:space="preserve">
     <value>The resource was not found, Customer with ID: {0}</value>
   </data>
+  <data name="DeleteBookFailure" xml:space="preserve">
+    <value>Book with ID: {0} not found, Delete failed</value>
+  </data>
   <data name="DeleteBookOk" xml:space="preserve">
     <value>Successfully deleted the Book object</value>
   </data>
+  <data name="DeleteCustomerFailure" xml:space="preserve">
+    <value>Customer with ID: {0} not found, Delete failed</value>
+  </data>
   <data name="DeleteCustomerOk" xml:space="preserve">
     <value>Successfully deleted the Customer object</value>
+  </data>
+  <data name="DeleteReservationFailure" xml:space="preserve">
+    <value>Reservation with ID: {0} not found, Delete failed</value>
   </data>
   <data name="ReservationAlreadyClosed" xml:space="preserve">
     <value>This Reservation is already closed, the closed Reservation's ID is: {0}</value>

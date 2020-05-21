@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AxaAssistanceTest.Models.Repositories.Reservations
 {
+    /// <summary>
+    /// Data Source accessor for the Reservation entity.
+    /// </summary>
     public interface IReservationRepository
     {
         List<Reservation> GetAllReservations();

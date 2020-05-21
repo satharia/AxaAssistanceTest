@@ -7,6 +7,9 @@ using System.Web;
 
 namespace AxaAssistanceTest.Models.Entities.Reservations
 {
+    /// <summary>
+    /// Entity class representing a relationship between a reservation and the Books withdrawn in it.
+    /// </summary>
     public class ReservedBook : AuditEntity
     {
         [Key]

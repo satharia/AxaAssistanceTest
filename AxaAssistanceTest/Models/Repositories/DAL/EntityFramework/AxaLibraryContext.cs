@@ -9,6 +9,9 @@ using System.Web;
 
 namespace AxaAssistanceTest.Models.Repositories.DAL.EntityFramework
 {
+    /// <summary>
+    /// Entity Framework Database context definition.
+    /// </summary>
     public class AxaLibraryContext : DbContext
     {
         public AxaLibraryContext() : base("AxaLibraryContext")
@@ -21,6 +24,9 @@ namespace AxaAssistanceTest.Models.Repositories.DAL.EntityFramework
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ReservedBook> ReservedBooks { get; set; }
 
+        /// <summary>
+        /// Configuration method for Entity Framework behaviours.
+        /// </summary>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
         }

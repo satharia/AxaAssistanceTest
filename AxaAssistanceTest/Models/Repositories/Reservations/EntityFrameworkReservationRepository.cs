@@ -7,6 +7,9 @@ using System.Linq;
 
 namespace AxaAssistanceTest.Models.Repositories.Reservations
 {
+    /// <summary>
+    /// Data Source accessor for the Reservation entity using Entity Framework.
+    /// </summary>
     public class EntityFrameworkReservationRepository : IReservationRepository
     {
 
@@ -51,7 +54,7 @@ namespace AxaAssistanceTest.Models.Repositories.Reservations
             Reservation reservation = this.DbContext.Reservations.Find(id);
             if (reservation == null)
             {
-                throw new Exception($"Reservation with ID: {id} not found, Delete failed");
+                throw new Exception(string.Format(ResponseMessages.DeleteReservationFailure, id));
             }
 
             this.DbContext.Reservations.Remove(reservation);

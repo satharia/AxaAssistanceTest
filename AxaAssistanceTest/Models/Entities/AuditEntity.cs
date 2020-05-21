@@ -2,6 +2,9 @@
 
 namespace AxaAssistanceTest.Models.Entities
 {
+    /// <summary>
+    /// Class defining common audit data for entities.
+    /// </summary>
     public class AuditEntity
     {
         public DateTime? CreationTime { get; set; }

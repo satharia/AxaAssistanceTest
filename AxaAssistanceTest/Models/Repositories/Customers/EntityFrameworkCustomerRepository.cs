@@ -4,10 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
 
 namespace AxaAssistanceTest.Models.Repositories.Customers
 {
+    /// <summary>
+    /// Data Source accessor for the Customer entity using Entity Framework.
+    /// </summary>
     public class EntityFrameworkCustomerRepository : ICustomerRepository
     {
         private AxaLibraryContext DbContext;
@@ -46,7 +48,7 @@ namespace AxaAssistanceTest.Models.Repositories.Customers
             Customer customer = this.DbContext.Customers.Find(id);
             if (customer == null)
             {
-                throw new Exception($"Customer with ID: {id} not found, Delete failed");
+                throw new Exception(string.Format(ResponseMessages.DeleteCustomerFailure, id));
             }
 
             this.DbContext.Customers.Remove(customer);

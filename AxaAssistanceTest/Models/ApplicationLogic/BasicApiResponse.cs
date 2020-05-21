@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace AxaAssistanceTest.Models.ApplicationLogic
+﻿namespace AxaAssistanceTest.Models.ApplicationLogic
 {
+    /// <summary>
+    /// Wrapper class used to return and object and a message in a HTTP response.
+    /// </summary>
     public class BasicApiResponse
     {
         public string Message { get; set; }

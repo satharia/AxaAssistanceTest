@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace AxaAssistanceTest.Models.Entities.Reservations
 {
+    /// <summary>
+    /// Entity class representing a reservation of Books that a Customer withdraws from a library.
+    /// </summary>
     public class Reservation : AuditEntity
     {
         [Key]

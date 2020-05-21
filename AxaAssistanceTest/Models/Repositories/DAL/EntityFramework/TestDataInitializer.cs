@@ -8,8 +8,14 @@ using System.Web;
 
 namespace AxaAssistanceTest.Models.Repositories.DAL.EntityFramework
 {
+    /// <summary>
+    /// Entity framework Database initializer.
+    /// </summary>
     public class TestDataInitializer : System.Data.Entity.CreateDatabaseIfNotExists<AxaLibraryContext>
     {
+        /// <summary>
+        /// Dummy data generator.
+        /// </summary>
         protected override void Seed(AxaLibraryContext libraryContext)
         {
             var books = new List<Book>
